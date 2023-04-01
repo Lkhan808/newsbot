@@ -24,12 +24,12 @@ async def all_news(message: types.Message):
 async def get_fresh_news(message: types.Message):
     fresh_news = check_updates()
     if len(fresh_news) >= 1:
-        for k, v in sorted(fresh_news.items()):
-            news = f"{datetime.datetime.fromtimestamp(v['news_datetime_stamp'])}\n" \
-                   f"{v['news_title']}\n" \
-                   f"{v['news_text']}\n" \
-                   f"{v['news_url']}"
-            await message.answer(news)
+            for k, v in sorted(fresh_news.items())[-5:]:
+                news = f"{datetime.datetime.fromtimestamp(v['news_datetime_stamp'])}\n" \
+                       f"{v['news_title']}\n" \
+                       f"{v['news_text']}\n" \
+                       f"{v['news_url']}"
+                await message.answer(news)
     else:
         await message.answer("Свежих новостей пока нет")
 
